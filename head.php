@@ -23,8 +23,6 @@ if(isset($_GET['pro_id'])){
 
     $per_set = $row_product['per_set'];
 
-    $current_quantity = $row_product['current_quantity'];
-
     $image = $row_product['image'];
 
     $get_p_cat = "SELECT * from categories where id = '$category1'";
@@ -42,7 +40,6 @@ if(isset($_GET['pro_id'])){
 <html>
 <head>
   <title>Crosspoint Paper, Inc.</title>
-    <link rel="stylesheet" href="styles/bootstrap-337.min.css">
     <link rel="stylesheet" href="font-awsome/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/style.css">
   <link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">

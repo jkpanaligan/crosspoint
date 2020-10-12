@@ -87,6 +87,14 @@
 
                </button>
 
+               <button class="navbar-toggle" data-toggle="collapse" data-target="#search">
+
+                   <span class="sr-only">Toggle Search</span>
+
+                   <i class="fa fa-search"></i>
+
+               </button>
+
            </div><!-- navbar-header Finish -->
 
            <div class="navbar-collapse collapse" id="navigation"><!-- navbar-collapse collapse Begin -->
@@ -137,6 +145,8 @@
 
                </a><!-- btn navbar-btn btn-primary Finish -->
 
+               <div class="collapse clearfix" id="search"><!-- collapse clearfix Begin -->
+
                    <form method="get" action="results.php" class="navbar-form"><!-- navbar-form Begin -->
 
                        <div class="input-group"><!-- input-group Begin -->
@@ -156,6 +166,8 @@
                        </div><!-- input-group Finish -->
 
                    </form><!-- navbar-form Finish -->
+
+               </div><!-- collapse clearfix Finish -->
 
            </div><!-- navbar-collapse collapse Finish -->
 

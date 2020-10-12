@@ -22,11 +22,17 @@
 
            </div><!-- col-md-12 Finish -->
 
+           <div class="col-md-3"><!-- col-md-3 Begin -->
 
-           <div class="col-md-1">
+   <?php
 
-           </div>
-    <div class="col-md-6"><!-- col-md-9 Begin -->
+    include("leftbar.php");
+
+    ?>
+
+          </div><!-- col-md-3 Finish -->
+
+    <div class="col-md-9"><!-- col-md-9 Begin -->
 
      <?php
 
@@ -43,15 +49,6 @@
      ?>
 
     </div><!-- col-md-9 Finish -->
-    <div class="col-md-4"><!-- col-md-3 Begin -->
-
-    <?php
-
-    include("leftbar.php");
-
-    ?>
-
-   </div><!-- col-md-3 Finish -->
   </div><!-- container Finish -->
 </div><!-- #content Finish -->
 

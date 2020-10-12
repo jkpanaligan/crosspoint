@@ -9,15 +9,6 @@
       'quantity'  => $quantity,
     );
 
-    $total = 0;
-    $productQ = $db->query("SELECT * FROM products WHERE id = '{$product_id}'");
-    $product = mysqli_fetch_assoc($productQ);
-
-    $quantity1 = $product['current_quantity'];
-    $total = $quantity1 - $quantity;
-
-    $db->query("UPDATE products SET current_quantity = '$total' where id = '$product_id'");
-
     $ip_add = getRealIpUser();
     $p_id = sanitize($_POST['product_id']);
     $quantity = sanitize($_POST['quantity']);

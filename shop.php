@@ -152,7 +152,7 @@
                    <ul class="pagination"><!-- pagination Begin -->
 					 <?php
 
-                    $query = "select * from products where featured = 1";
+                    $query = "select * from products";
 
                     $result = mysqli_query($db,$query);
 

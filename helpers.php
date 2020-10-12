@@ -52,7 +52,7 @@ function has_permission($permission = 'admin'){
 }
 
 function pretty_date($date){
-  return date("M d, Y", strtotime($date));
+  return date("M d, Y h:i A", strtotime($date));
 }
 
 function get_category($child_id){
@@ -250,7 +250,7 @@ function getpcatpro(){
 
         $p_cat_title = $row_p_cat['category'];
 
-        $get_products ="SELECT * from products where featured = 1 AND category='$p_cat_id'";
+        $get_products ="SELECT * from products where category='$p_cat_id'";
 
         $run_products = mysqli_query($db,$get_products);
 

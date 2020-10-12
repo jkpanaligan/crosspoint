@@ -10,7 +10,7 @@
     $result = mysqli_fetch_assoc($cartQ);
     $items = json_decode($result['items'],true);
     $i = 1;
-    $grand_total = 0;
+    $sub_total = 0;
     $item_count = 0;
 
     }
@@ -50,7 +50,16 @@
                    <table class="table tablt-bordered table-condensed table-striped">
                     <thead><th>#</th><th>Item</th><th>Price</th><th>Quantity</th><th>Amount</th><th>Delete</th></thead>
 
+                                  <tfoot><!-- tfoot Begin -->
 
+                                     <tr><!-- tr Begin -->
+
+                                         <th colspan="4">Sub Total</th>
+                                         <th colspan="2">P 0</th>
+
+                                     </tr><!-- tr Finish -->
+
+                                 </tfoot><!-- tfoot Finish -->
                   </table>
 
                 </div><!-- table-responsive Finish -->
@@ -69,20 +78,11 @@
 
                            <div class="pull-right"><!-- pull-right Begin -->
 
-                             <?php if(!empty($grand_total) && $grand_total >= 10000): ?>
                                <a href="checkout.php" class="btn btn-primary">
 
                                    Proceed Checkout <i class="fa fa-chevron-right"></i>
 
                                </a>
-                             <?php else: ?>
-                               <a href="cart.php" class="btn btn-primary">
-
-                                   Proceed Checkout <i class="fa fa-chevron-right"></i>
-
-                               </a>
-
-                              <?php endif; ?>
 
                            </div><!-- pull-right Finish -->
 
@@ -101,7 +101,7 @@
 
                      <?php
 
-                     $get_products = "SELECT * from products where featured = 1 order by rand() LIMIT 0,3";
+                     $get_products = "select * from products order by rand() LIMIT 0,3";
 
                      $run_products = mysqli_query($db,$get_products);
 
@@ -153,6 +153,12 @@
 
                      </div><!-- box-header Finish -->
 
+                     <p class="text-muted"><!-- text-muted Begin -->
+
+                         Shipping and additional costs are calculated based on value you have entered
+
+                     </p><!-- text-muted Finish -->
+
                      <div class="table-responsive"><!-- table-responsive Begin -->
 
                          <table class="table"><!-- table Begin -->
@@ -163,6 +169,13 @@
 
                                      <td> Order All Sub-Total </td>
                                      <th> P0 </th>
+
+                                 </tr><!-- tr Finish -->
+
+                                 <tr><!-- tr Begin -->
+
+                                     <td> Shipping and Handling </td>
+                                     <td> P0 </td>
 
                                  </tr><!-- tr Finish -->
 
@@ -259,11 +272,7 @@
                         <td>
                           <button class="btn btn-xs btn-default" onclick="update_cart1('removeone','<?=$product['id'];?>');">-</button>
                           <?=$item['quantity'];?>
-                          <?php if($product['current_quantity'] == 0): ?>
-                            <span class="text-danger">Max</span>
-                          <?php else: ?>
-                            <button class="btn btn-xs btn-default" onclick="update_cart1('addone','<?=$product['id'];?>');">+</button>
-                          <?php endif; ?>
+                          <button class="btn btn-xs btn-default" onclick="update_cart1('addone','<?=$product['id'];?>');">+</button>
                         </td>
                         <td><?=money($item['quantity'] * $product['price']);?></td>
                         <td><button class="btn btn-xs btn-default" onclick="update_cart1('delete','<?=$product['id'];?>');"><span class="glyphicon glyphicon-remove"></span></button></td>
@@ -271,13 +280,22 @@
                     <?php
                       $i++;
                       $item_count += $item["quantity"];
-                      $grand_total += ($product['price'] * $item['quantity']);
+                      $sub_total += ($product['price'] * $item['quantity']);
                     }
-                    $tax = TAXRATE * $grand_total;
-                    $sub_total = $grand_total - $tax;
+                    $tax = TAXRATE * $sub_total;
+                    $grand_total = $tax + $sub_total;
                     ?>
                   </tbody>
+                                <tfoot><!-- tfoot Begin -->
 
+                                   <tr><!-- tr Begin -->
+
+                                       <th colspan="4">Sub Total</th>
+                                       <th colspan="2">P<?php echo $sub_total; ?></th>
+
+                                   </tr><!-- tr Finish -->
+
+                               </tfoot><!-- tfoot Finish -->
 
                 </table>
 
@@ -297,21 +315,11 @@
 
                          <div class="pull-right"><!-- pull-right Begin -->
 
-                           <?php if(!empty($grand_total) && $grand_total >= 10000): ?>
                              <a href="checkout.php" class="btn btn-primary">
 
                                  Proceed Checkout <i class="fa fa-chevron-right"></i>
 
                              </a>
-                           <?php else: ?>
-                             <a href="cart.php" class="btn btn-primary">
-
-                                 Proceed Checkout <i class="fa fa-chevron-right"></i>
-
-                             </a>
-
-                            <?php endif; ?>
-
 
                          </div><!-- pull-right Finish -->
 
@@ -330,7 +338,7 @@
 
                    <?php
 
-                   $get_products = "SELECT * from products where featured = 1 order by rand() LIMIT 0,3";
+                   $get_products = "select * from products order by rand() LIMIT 0,3";
 
                    $run_products = mysqli_query($db,$get_products);
 
@@ -377,18 +385,16 @@
                <div id="order-summary" class="box"><!-- box Begin -->
 
                    <div class="box-header"><!-- box-header Begin -->
-                     <?php if($grand_total > 10000): ?>
-                     <?php else: ?>
-                     <div class="bg-danger">
-                       <p class="text-center text-danger">
-                         Total amount of your order should be greater than P10,000
-                       </p>
-                     </div>
-                     <?php endif; ?>
 
                        <h3>Order Summary</h3>
 
                    </div><!-- box-header Finish -->
+
+                   <p class="text-muted"><!-- text-muted Begin -->
+
+                       Shipping and additional costs are calculated based on value you have entered
+
+                   </p><!-- text-muted Finish -->
 
                    <div class="table-responsive"><!-- table-responsive Begin -->
 
@@ -399,21 +405,28 @@
                                <tr><!-- tr Begin -->
 
                                    <td> Order All Sub-Total </td>
-                                   <th> <?php echo money($sub_total); ?> </th>
+                                   <th> P<?php echo $sub_total; ?> </th>
+
+                               </tr><!-- tr Finish -->
+
+                               <tr><!-- tr Begin -->
+
+                                   <td> Shipping and Handling </td>
+                                   <td> P0 </td>
 
                                </tr><!-- tr Finish -->
 
                                <tr><!-- tr Begin -->
 
                                    <td> Tax </td>
-                                   <th> <?php echo money($tax); ?> </th>
+                                   <th> P<?php echo $tax; ?> </th>
 
                                </tr><!-- tr Finish -->
 
                                <tr class="total"><!-- tr Begin -->
 
                                    <td> Total </td>
-                                   <th> <?php echo money($grand_total); ?> </th>
+                                   <th> P<?php echo $grand_total; ?> </th>
 
                                </tr><!-- tr Finish -->
 

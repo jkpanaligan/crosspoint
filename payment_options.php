@@ -14,19 +14,6 @@
 
     <p class="lead text-center"><!-- lead text-center Begin -->
 
-          <a href="paywithcard.php">Pay with Card </a>
-
-     </p><!-- lead text-center Finish -->
-
-     <p class="lead text-center"><!-- lead text-center Begin -->
-
-           Or
-
-      </p><!-- lead text-center Finish -->
-
-
-    <p class="lead text-center"><!-- lead text-center Begin -->
-
          <a href="order.php?id=<?php echo $customer_id ?>"> Offline Payment </a>
 
      </p><!-- lead text-center Finish -->

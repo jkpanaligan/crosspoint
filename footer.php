@@ -83,7 +83,7 @@
 
             <div class="col-sm-6 col-md-3"><!-- col-sm-6 col-md-3 Begin -->
 
-                <h4>About Us</h4>
+                <h4>Find Us</h4>
 
                 <p><!-- p Start -->
 
@@ -132,16 +132,12 @@ function update_cart1(mode,edit_id){
 function add_to_cart(){
     jQuery('#modal_errors').html("");
     var quantity = jQuery('#quantity').val();
-    var available = jQuery('#available').val();
     var error = '';
     var data = jQuery('#add_product_form').serialize();
     if(quantity == '' || quantity == 0){
       error += '<p class="text-danger text-center">You must enter a quantity.</p>';
       jQuery('#modal_errors').html(error);
       return;
-    }else if(available < quantity && available > quantity){
-     error += '<p class="text-danger text-center">There are only '+available+' available.</p>';
-     jQuery('#modal_errors').html(error);
     }else{
       jQuery.ajax({
         url : '/crosspointpaper/add_cart.php',
